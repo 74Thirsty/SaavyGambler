@@ -1,0 +1,26 @@
+[project]
+name = "stattrackerpro"
+version = "0.1.0"
+description = "Production-ready toolkit for sports statistics tracking and predictions"
+authors = [{name = "StatTrackerPro"}]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110.0",
+    "httpx>=0.25.2",
+    "pydantic>=1.10,<2.0",
+]
+
+[project.optional-dependencies]
+server = ["uvicorn[standard]>=0.20.0"]
+
+[project.scripts]
+stattrackerpro = "stattrackerpro.cli:main"
+
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+addopts = "-q"

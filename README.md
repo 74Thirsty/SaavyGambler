@@ -35,7 +35,9 @@ probabilities.
    ```
 
 2. (Optional) set environment variables in a `.env` file to configure API keys
-   and cache locations:
+   and cache locations. When no key is supplied StatTrackerPro automatically
+   uses TheSportsDB's free lookup tier, so you can get started without signing
+   up for an account:
 
    ```env
    stattrackerpro_sportsdb_api_key=YOUR_API_KEY

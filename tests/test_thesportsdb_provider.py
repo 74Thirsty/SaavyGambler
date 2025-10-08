@@ -30,8 +30,10 @@ httpx_stub.HTTPStatusError = _DummyHTTPError
 httpx_stub.RequestError = _DummyRequestError
 sys.modules.setdefault("httpx", httpx_stub)
 
+from unittest import mock
+
 from stattrackerpro.models import Event
-from stattrackerpro.providers.thesportsdb import TheSportsDBProvider
+from stattrackerpro.providers.thesportsdb import BASE_URL, TheSportsDBProvider
 
 
 class DummyClient:
@@ -106,3 +108,16 @@ def test_get_events_includes_team_names():
     assert event.home_team_name == "Alpha"
     assert event.away_team_name == "Beta"
     assert event.event_date == date(2024, 2, 1)
+
+
+def test_provider_uses_free_lookup_key_when_api_key_missing():
+    dummy_client = DummyClient(event_payloads={"42": {"events": []}})
+    fake_settings = types.SimpleNamespace(sportsdb_api_key="   ")
+
+    with mock.patch("stattrackerpro.providers.thesportsdb.get_settings", return_value=fake_settings):
+        provider = TheSportsDBProvider(client=dummy_client)
+        provider.lookup_events(["42"])
+
+    assert dummy_client.requests
+    first_request = dummy_client.requests[0]
+    assert first_request["url"].startswith(f"{BASE_URL}/1/")

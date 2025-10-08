@@ -26,6 +26,9 @@ gambler-gui = "saavygambler.gui.__main__:main"
 requires = ["setuptools>=65", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+include = ["saavygambler*"]
+
 [tool.pytest.ini_options]
 pythonpath = ["."]
 addopts = "-q"

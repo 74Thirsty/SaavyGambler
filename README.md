@@ -1,9 +1,9 @@
 ![Sheen Banner](https://raw.githubusercontent.com/74Thirsty/74Thirsty/main/assets/statpro.svg)
 
 
-# StatTrackerPro
+# SaavyGambler
 
-StatTrackerPro is a production-grade toolkit that helps fantasy sports players
+SaavyGambler is a production-grade toolkit that helps fantasy sports players
 and bettors track statistics, fetch real-time data from public APIs, and
 calculate predictive insights such as point spreads, totals, and win
 probabilities.
@@ -40,22 +40,22 @@ probabilities.
    up for an account:
 
    ```env
-   stattrackerpro_sportsdb_api_key=YOUR_API_KEY
-   stattrackerpro_cache_dir=.cache
+   gambler_sportsdb_api_key=YOUR_API_KEY
+   gambler_cache_dir=.cache
    ```
 
 3. Run the FastAPI service:
 
    ```bash
-   uvicorn stattrackerpro.app.main:app --reload
+   uvicorn gambler.app.main:app --reload
    ```
 
 4. Use the CLI:
 
    ```bash
-   stattrackerpro insights 4328
-   stattrackerpro fantasy 34145937
-   stattrackerpro events 2052711 2052712 2052713 2052714
+   gambler insights 4328
+   gambler fantasy 34145937
+   gambler events 2052711 2052712 2052713 2052714
    ```
 
    The ``events`` command looks up fixtures by ID using the free
@@ -72,14 +72,14 @@ Run the automated test suite with:
 pytest
 ```
 
-From those package metadata files, here’s what the **StatTrackerPro** FastAPI service actually does:
+From those package metadata files, here’s what the **SaavyGambler** FastAPI service actually does:
 
 ---
 
 ### 🧠 **High-level purpose**
 
-`stattrackerpro` is a **sports statistics and analytics service** built around FastAPI.
-It exposes API endpoints (via `stattrackerpro/app/main.py`) for **collecting**, **analyzing**, and **predicting** sports data — likely for fantasy sports or performance tracking.
+`SaavyGambler` is a **sports statistics and analytics service** built around FastAPI.
+It exposes API endpoints (via `saavygambler/app/main.py`) for **collecting**, **analyzing**, and **predicting** sports data — likely for fantasy sports or performance tracking.
 
 ---
 
@@ -87,19 +87,19 @@ It exposes API endpoints (via `stattrackerpro/app/main.py`) for **collecting**, 
 
 The module layout tells us how the service works:
 
-| Path                                        | Role                                                                               |
-| ------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `stattrackerpro/app/main.py`                | The FastAPI entry point — defines routes, starts the HTTP server.                  |
-| `stattrackerpro/app/schemas.py`             | Pydantic schemas for request/response validation.                                  |
-| `stattrackerpro/providers/api_client.py`    | Asynchronous HTTP client (probably wraps external APIs like TheSportsDB).          |
-| `stattrackerpro/providers/thesportsdb.py`   | Integration with the [TheSportsDB](https://www.thesportsdb.com/) sports stats API. |
-| `stattrackerpro/services/stat_collector.py` | Core data ingestion service; pulls stats from providers into structured models.    |
-| `stattrackerpro/services/analytics.py`      | Performs derived analytics — aggregates player or team metrics.                    |
-| `stattrackerpro/services/fantasy.py`        | Fantasy scoring and roster projection logic.                                       |
-| `stattrackerpro/services/prediction.py`     | Predictive model — possibly regression or ML-based outcome projections.            |
-| `stattrackerpro/models.py`                  | ORM or domain models for teams, players, games, etc.                               |
-| `stattrackerpro/config.py`                  | Environment/configuration loading.                                                 |
-| `stattrackerpro/cli.py`                     | Command-line interface to run or manage the app.                                   |
+| Path                                      |  Role                                                                              |
+| ----------------------------------------- |  --------------------------------------------------------------------------------  |
+| `saavygambler/app/main.py`                | The FastAPI entry point — defines routes, starts the HTTP server.                  |
+| `saavygambler/app/schemas.py`             | Pydantic schemas for request/response validation.                                  |
+| `saavygambler/providers/api_client.py`    | Asynchronous HTTP client (probably wraps external APIs like TheSportsDB).          |
+| `saavygambler/providers/thesportsdb.py`   | Integration with the [TheSportsDB](https://www.thesportsdb.com/) sports stats API. |
+| `saavygambler/services/stat_collector.py` | Core data ingestion service; pulls stats from providers into structured models.    |
+| `saavygambler/services/analytics.py`      | Performs derived analytics — aggregates player or team metrics.                    |
+| `saavygambler/services/fantasy.py`        | Fantasy scoring and roster projection logic.                                       |
+| `saavygambler/services/prediction.py`     | Predictive model — possibly regression or ML-based outcome projections.            |
+| `saavygambler/models.py`                  | ORM or domain models for teams, players, games, etc.                               |
+| `saavygambler/config.py`                  | Environment/configuration loading.                                                 |
+| `saavygambler/cli.py`                     | Command-line interface to run or manage the app.                                   |
 
 ---
 
@@ -108,7 +108,7 @@ The module layout tells us how the service works:
 The command you gave:
 
 ```bash
-uvicorn stattrackerpro.app.main:app --reload
+uvicorn gambler.app.main:app --reload
 ```
 
 starts the **FastAPI** app defined in `main.py`.
@@ -116,7 +116,7 @@ That file (typical pattern) looks like:
 
 ```python
 from fastapi import FastAPI
-from stattrackerpro.services import stat_collector, analytics, prediction, fantasy
+from gambler.services import stat_collector, analytics, prediction, fantasy
 
 app = FastAPI(title="StatTrackerPro")
 

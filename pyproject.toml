@@ -13,9 +13,14 @@ dependencies = [
 
 [project.optional-dependencies]
 server = ["uvicorn[standard]>=0.20.0"]
+gui = [
+    "kivy>=2.2.1",
+    "kivymd>=1.2.0",
+]
 
 [project.scripts]
 stattrackerpro = "stattrackerpro.cli:main"
+stattrackerpro-gui = "stattrackerpro.gui.__main__:main"
 
 [build-system]
 requires = ["setuptools>=65", "wheel"]

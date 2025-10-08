@@ -64,6 +64,40 @@ probabilities.
    about and the CLI will return the scheduled date along with the home and
    away teams.
 
+## Graphical Interface
+
+Install the optional GUI dependencies and launch the modern KivyMD-powered
+interface:
+
+```bash
+pip install -e .[gui]
+stattrackerpro-gui
+```
+
+The desktop application exposes three tabs:
+
+- **Teams** – search TheSportsDB for teams by name and view records and scoring
+  trends.
+- **Events** – look up specific fixtures by their identifier to see the matchup,
+  date, venue, and status.
+- **Players** – retrieve player box score averages and any custom metrics
+  exposed by the data provider.
+
+## Building an Android APK
+
+Use [Buildozer](https://github.com/kivy/buildozer) to generate an APK from the
+same KivyMD interface:
+
+```bash
+pip install buildozer
+cd android
+buildozer -v android debug
+```
+
+The provided ``android/buildozer.spec`` file points Buildozer at the
+``gui_main.py`` helper script in the project root, which bootstraps the GUI. The
+resulting APK can be found in ``android/bin`` after a successful build.
+
 ## Testing
 
 Run the automated test suite with:

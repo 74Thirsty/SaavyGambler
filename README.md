@@ -98,6 +98,46 @@ The provided ``android/buildozer.spec`` file points Buildozer at the
 ``gui_main.py`` helper script in the project root, which bootstraps the GUI. The
 resulting APK can be found in ``android/bin`` after a successful build.
 
+### Play Store release builds
+
+To ship the exact same interface to the Play Store, populate the release
+signing fields in ``android/buildozer.spec``. You can edit the file directly or
+fill the blank entries from environment variables:
+
+```bash
+export ANDROID_KEYSTORE_PATH=/absolute/path/to/saavygambler.keystore
+export ANDROID_KEYSTORE_PASSWORD=your_keystore_password
+export ANDROID_KEYALIAS=saavygambler
+export ANDROID_KEYALIAS_PASSWORD=your_alias_password
+
+python - <<'PY'
+import configparser, os, pathlib
+spec_path = pathlib.Path('android/buildozer.spec')
+config = configparser.ConfigParser()
+config.read(spec_path)
+section = config['app']
+section['android.release_keystore'] = os.environ['ANDROID_KEYSTORE_PATH']
+section['android.release_keyalias'] = os.environ['ANDROID_KEYALIAS']
+section['android.keystore_password'] = os.environ['ANDROID_KEYSTORE_PASSWORD']
+section['android.keyalias_password'] = os.environ['ANDROID_KEYALIAS_PASSWORD']
+with spec_path.open('w') as fh:
+    config.write(fh)
+PY
+```
+
+Then build the signed release artifact:
+
+```bash
+cd android
+buildozer -v android release
+```
+
+Buildozer produces a zip-aligned, Play Store ready ``*-release.apk`` inside
+``android/bin`` using the same KivyMD code path as the debug build. After the
+build completes you can restore the original spec with ``git checkout --
+android/buildozer.spec`` and verify the signature using ``apksigner verify
+--print-certs`` before uploading to the Play Console.
+
 ## Testing
 
 Run the automated test suite with:

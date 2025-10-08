@@ -13,9 +13,18 @@ orientation = portrait
 fullscreen = 0
 android.api = 33
 android.minapi = 24
-android.archs = arm64-v8a
+android.archs = arm64-v8a,armeabi-v7a
+android.permissions = INTERNET
 log_level = 2
 main = gui_main.py
+
+# Configure release signing before uploading to the Play Store. Leave these
+# blank for debug builds and populate them via environment templating or manual
+# edits prior to running ``buildozer android release``.
+android.release_keystore =
+android.release_keyalias =
+android.keystore_password =
+android.keyalias_password =
 
 [buildozer]
 warn_on_root = 1

@@ -13,8 +13,7 @@ from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.label import MDLabel
 from kivymd.uix.list import MDList, OneLineListItem, TwoLineListItem
 from kivymd.uix.screen import MDScreen
-from kivymd.uix.tab import MDTabsBase
-from kivymd.uix.tabs import MDTabs
+from kivymd.uix.tab import MDTabs, MDTabsBase
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.toolbar import MDTopAppBar
 

@@ -6,6 +6,8 @@ import json
 from datetime import date
 from typing import List
 
+import httpx
+
 from .providers.thesportsdb import TheSportsDBProvider
 from .services.analytics import AnalyticsService
 
@@ -37,17 +39,36 @@ def main(argv: List[str] | None = None) -> int:
     service = AnalyticsService(TheSportsDBProvider())
 
     if args.command == "insights":
-        insights = service.insights_for_league(args.league_id, from_date=args.from_date)
+        try:
+            insights = service.insights_for_league(args.league_id, from_date=args.from_date)
+        except httpx.HTTPStatusError as exc:
+            print(
+                f"⚠️ No data found for league {args.league_id} ({exc.response.status_code})"
+            )
+            return 1
         print(json.dumps([_serialize_insight(insight) for insight in insights], default=str, indent=2))
         return 0
 
     if args.command == "fantasy":
-        projections = service.fantasy_projections(args.player_ids)
+        try:
+            projections = service.fantasy_projections(args.player_ids)
+        except httpx.HTTPStatusError as exc:
+            print(
+                "⚠️ No data found for the requested players "
+                f"({exc.response.status_code})"
+            )
+            return 1
         print(json.dumps([projection.__dict__ for projection in projections], default=str, indent=2))
         return 0
 
     if args.command == "events":
-        events = service.lookup_events(args.event_ids)
+        try:
+            events = service.lookup_events(args.event_ids)
+        except httpx.HTTPStatusError as exc:
+            print(
+                f"⚠️ No data found for the requested events ({exc.response.status_code})"
+            )
+            return 1
         print(json.dumps([_serialize_event(event) for event in events], default=str, indent=2))
         return 0
 

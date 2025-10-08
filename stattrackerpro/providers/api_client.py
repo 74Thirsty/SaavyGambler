@@ -75,6 +75,9 @@ class APIClient:
         while True:
             try:
                 response = self._client.get(url, params=params, headers=headers)
+                if response.status_code == 404:
+                    LOGGER.warning("[APIClient] 404 Not Found for %s", response.url)
+                    return {}
                 response.raise_for_status()
                 data = response.json()
                 if cache_ttl:

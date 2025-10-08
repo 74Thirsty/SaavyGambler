@@ -1,9 +1,9 @@
 [app]
-title = StatTrackerPro
-description = Simple modern interface for StatTrackerPro insights
-package.name = stattrackerpro
-package.domain = org.stattrackerpro
-author = StatTrackerPro Team
+title = SaavyGambler
+description = Simple modern interface for SaavyGambler insights
+package.name = gambler
+package.domain = org.saavygambler
+author = SaavyGambler Team
 source.dir = ..
 source.include_exts = py,kv,atlas
 source.exclude_dirs = tests,.github,__pycache__

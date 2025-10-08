@@ -32,8 +32,8 @@ sys.modules.setdefault("httpx", httpx_stub)
 
 from unittest import mock
 
-from stattrackerpro.models import Event
-from stattrackerpro.providers.thesportsdb import BASE_URL, TheSportsDBProvider
+from saavygambler.models import Event
+from saavygambler.providers.thesportsdb import BASE_URL, TheSportsDBProvider
 
 
 class DummyClient:
@@ -114,7 +114,7 @@ def test_provider_uses_free_lookup_key_when_api_key_missing():
     dummy_client = DummyClient(event_payloads={"42": {"events": []}})
     fake_settings = types.SimpleNamespace(sportsdb_api_key="   ")
 
-    with mock.patch("stattrackerpro.providers.thesportsdb.get_settings", return_value=fake_settings):
+    with mock.patch("saavygambler.providers.thesportsdb.get_settings", return_value=fake_settings):
         provider = TheSportsDBProvider(client=dummy_client)
         provider.lookup_events(["42"])
 

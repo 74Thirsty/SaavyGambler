@@ -1,4 +1,4 @@
-"""FastAPI application exposing StatTrackerPro functionality."""
+"""FastAPI application exposing SaavyGambler functionality."""
 from __future__ import annotations
 
 from datetime import date
@@ -10,7 +10,7 @@ from ..providers.thesportsdb import TheSportsDBProvider
 from ..services.analytics import AnalyticsService, EventInsights
 from .schemas import EventInsightsSchema, FantasyProjectionSchema
 
-app = FastAPI(title="StatTrackerPro", version="1.0.0")
+app = FastAPI(title="SaavyGambler", version="1.0.0")
 
 
 def get_analytics_service() -> AnalyticsService:

@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Dict, Iterable, Mapping, Optional
 
 
-ENV_PREFIX = "stattrackerpro_"
+ENV_PREFIX = "saavygambler_"
 
 
 def _normalise_env(env: Mapping[str, str]) -> Dict[str, str]:
@@ -61,7 +61,7 @@ def _extract_prefixed(env: Mapping[str, str]) -> Dict[str, str]:
 
 @dataclass
 class AppSettings:
-    """Settings for the StatTrackerPro application.
+    """Settings for the SaavyGambler application.
 
     The class offers a tiny subset of the conveniences of ``BaseSettings`` from
     Pydantic: values may be provided as constructor arguments or derived from

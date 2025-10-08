@@ -1,8 +1,8 @@
 [project]
-name = "stattrackerpro"
+name = "saavygambler"
 version = "0.1.0"
 description = "Production-ready toolkit for sports statistics tracking and predictions"
-authors = [{name = "StatTrackerPro"}]
+authors = [{name = "SaavyGambler"}]
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -19,8 +19,8 @@ gui = [
 ]
 
 [project.scripts]
-stattrackerpro = "stattrackerpro.cli:main"
-stattrackerpro-gui = "stattrackerpro.gui.__main__:main"
+gambler = "saavygambler.cli:main"
+gambler-gui = "saavygambler.gui.__main__:main"
 
 [build-system]
 requires = ["setuptools>=65", "wheel"]

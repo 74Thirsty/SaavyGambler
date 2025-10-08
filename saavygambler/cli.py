@@ -1,4 +1,4 @@
-"""Command line interface for StatTrackerPro."""
+"""Command line interface for SaavyGambler."""
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,7 @@ from .services.analytics import AnalyticsService
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="StatTrackerPro CLI")
+    parser = argparse.ArgumentParser(description="SaavyGambler CLI")
     sub = parser.add_subparsers(dest="command", required=True)
 
     league_parser = sub.add_parser("insights", help="Fetch event insights for a league")

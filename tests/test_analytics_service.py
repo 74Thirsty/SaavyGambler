@@ -1,8 +1,8 @@
 from datetime import date
 
-from stattrackerpro.models import Event, Odds, PlayerStats, TeamStats
-from stattrackerpro.providers.base import SportsDataProvider
-from stattrackerpro.services.analytics import AnalyticsService
+from saavygambler.models import Event, Odds, PlayerStats, TeamStats
+from saavygambler.providers.base import SportsDataProvider
+from saavygambler.services.analytics import AnalyticsService
 
 
 class StubProvider(SportsDataProvider):

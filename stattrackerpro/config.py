@@ -112,7 +112,9 @@ class AppSettings:
 
         data: Dict[str, object] = {}
         if "sportsdb_api_key" in scoped:
-            data["sportsdb_api_key"] = scoped["sportsdb_api_key"]
+            value = str(scoped["sportsdb_api_key"]).strip()
+            if value:
+                data["sportsdb_api_key"] = value
         if "http_timeout_seconds" in scoped:
             try:
                 data["http_timeout_seconds"] = float(scoped["http_timeout_seconds"])

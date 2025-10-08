@@ -21,7 +21,14 @@ class TheSportsDBProvider(SportsDataProvider):
 
     @property
     def _base_url(self) -> str:
-        return f"{BASE_URL}/{self._settings.sportsdb_api_key}"
+        return f"{BASE_URL}/{self._resolve_api_key()}"
+
+    def _resolve_api_key(self) -> str:
+        value = getattr(self._settings, "sportsdb_api_key", None)
+        if value is None:
+            return "1"
+        key = str(value).strip()
+        return key or "1"
 
     def search_teams(self, name: str) -> List[TeamStats]:
         payload = self._client.get_json(

@@ -42,6 +42,8 @@ class Event:
     status: Optional[str] = None
     home_score: Optional[int] = None
     away_score: Optional[int] = None
+    home_team_name: Optional[str] = None
+    away_team_name: Optional[str] = None
 
     @property
     def is_final(self) -> bool:

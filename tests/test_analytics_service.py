@@ -33,6 +33,17 @@ class StubProvider(SportsDataProvider):
             )
         ]
 
+    def lookup_events(self, event_ids):
+        return [
+            Event(
+                event_id=event_ids[0],
+                league_id="999",
+                home_team_id="1",
+                away_team_id="2",
+                event_date=date.today(),
+            )
+        ]
+
     def get_player_stats(self, player_ids):
         return [
             PlayerStats(

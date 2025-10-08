@@ -20,6 +20,10 @@ class SportsDataProvider(abc.ABC):
         """Return upcoming or recent events for a league."""
 
     @abc.abstractmethod
+    def lookup_events(self, event_ids: Iterable[str]) -> List[Event]:
+        """Return detailed information for specific events."""
+
+    @abc.abstractmethod
     def get_team(self, team_id: str) -> Optional[TeamStats]:
         """Return a single team by identifier when supported."""
 

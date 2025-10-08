@@ -56,6 +56,9 @@ class AnalyticsService:
         stats: List[PlayerStats] = self.collector.player_stats(player_ids)
         return self.fantasy_projector.project(stats)
 
+    def lookup_events(self, event_ids: Iterable[str]) -> List[Event]:
+        return self.collector.lookup_events(event_ids)
+
     @staticmethod
     def combine_spread_predictions(predictions: Iterable[SpreadPrediction]) -> SpreadPrediction:
         return ensemble_spread(list(predictions))

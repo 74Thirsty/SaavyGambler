@@ -56,24 +56,19 @@ class TheSportsDBProvider(SportsDataProvider):
         )
         events = []
         for item in payload.get("events", []) or []:
-            event_date_str = item.get("dateEvent")
-            if event_date_str:
-                event_date = datetime.strptime(event_date_str, "%Y-%m-%d").date()
-            else:
-                event_date = date.today()
-            events.append(
-                Event(
-                    event_id=item.get("idEvent", ""),
-                    league_id=item.get("idLeague"),
-                    home_team_id=item.get("idHomeTeam", ""),
-                    away_team_id=item.get("idAwayTeam", ""),
-                    event_date=event_date,
-                    venue=item.get("strVenue"),
-                    status=item.get("strStatus"),
-                    home_score=self._safe_int(item.get("intHomeScore")),
-                    away_score=self._safe_int(item.get("intAwayScore")),
-                )
+            events.append(self._build_event(item))
+        return events
+
+    def lookup_events(self, event_ids: Iterable[str]) -> List[Event]:
+        events: List[Event] = []
+        for event_id in event_ids:
+            payload = self._client.get_json(
+                f"{self._base_url}/lookupevent.php",
+                params={"id": event_id},
+                cache_ttl=600,
             )
+            for item in payload.get("events", []) or []:
+                events.append(self._build_event(item))
         return events
 
     def get_team(self, team_id: str) -> Optional[TeamStats]:
@@ -155,6 +150,26 @@ class TheSportsDBProvider(SportsDataProvider):
             return float(value) if value not in (None, "") else None
         except (TypeError, ValueError):
             return None
+
+    def _build_event(self, item: dict) -> Event:
+        event_date_str = item.get("dateEvent")
+        if event_date_str:
+            event_date = datetime.strptime(event_date_str, "%Y-%m-%d").date()
+        else:
+            event_date = date.today()
+        return Event(
+            event_id=item.get("idEvent", ""),
+            league_id=item.get("idLeague"),
+            home_team_id=item.get("idHomeTeam", ""),
+            away_team_id=item.get("idAwayTeam", ""),
+            event_date=event_date,
+            venue=item.get("strVenue"),
+            status=item.get("strStatus"),
+            home_score=self._safe_int(item.get("intHomeScore")),
+            away_score=self._safe_int(item.get("intAwayScore")),
+            home_team_name=item.get("strHomeTeam"),
+            away_team_name=item.get("strAwayTeam"),
+        )
 
 
 __all__ = ["TheSportsDBProvider"]

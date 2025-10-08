@@ -25,6 +25,9 @@ def build_parser() -> argparse.ArgumentParser:
     fantasy_parser = sub.add_parser("fantasy", help="Generate fantasy projections")
     fantasy_parser.add_argument("player_ids", nargs="+", help="One or more player IDs")
 
+    events_parser = sub.add_parser("events", help="Lookup events by identifier")
+    events_parser.add_argument("event_ids", nargs="+", help="One or more event IDs")
+
     return parser
 
 
@@ -43,6 +46,11 @@ def main(argv: List[str] | None = None) -> int:
         print(json.dumps([projection.__dict__ for projection in projections], default=str, indent=2))
         return 0
 
+    if args.command == "events":
+        events = service.lookup_events(args.event_ids)
+        print(json.dumps([_serialize_event(event) for event in events], default=str, indent=2))
+        return 0
+
     parser.error("Unknown command")
     return 1
 
@@ -55,6 +63,17 @@ def _serialize_insight(insight):
         "odds": insight.odds.__dict__ if insight.odds else None,
         "spread_prediction": insight.spread_prediction.__dict__,
         "total_prediction": insight.total_prediction.__dict__,
+    }
+
+
+def _serialize_event(event):
+    return {
+        "event_id": event.event_id,
+        "date": event.event_date,
+        "home_team": event.home_team_name or event.home_team_id,
+        "away_team": event.away_team_name or event.away_team_id,
+        "venue": event.venue,
+        "status": event.status,
     }
 
 

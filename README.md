@@ -1,3 +1,6 @@
+![Sheen Banner](https://raw.githubusercontent.com/74Thirsty/74Thirsty/main/assets/statpro.svg)
+
+
 # StatTrackerPro
 
 StatTrackerPro is a production-grade toolkit that helps fantasy sports players

@@ -24,6 +24,21 @@ probabilities.
 - **CLI Utility** – Command line interface for fetching insights or generating
   projections.
 
+## GUI and mobile availability
+
+StatTrackerPro currently ships as a FastAPI service plus a Python CLI. There is
+no bundled graphical interface—"simple modern GUI" mockups that may appear in
+older discussions or issue threads were not checked into this repository. If
+you want a desktop or web UI, you will need to build a separate front-end that
+consumes the existing REST endpoints.
+
+Similarly, there is no Android application or Gradle project in the codebase,
+so an APK cannot be generated from the current sources. Creating a Play Store
+package would require developing a dedicated mobile client (for example with
+Kivy, Flutter, or React Native) that talks to the StatTrackerPro API, setting
+up Android-specific build tooling, and going through Google Play's publishing
+process.
+
 ## Getting Started
 
 1. Create a virtual environment and install dependencies:

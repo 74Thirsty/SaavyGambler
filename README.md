@@ -10,6 +10,8 @@ probabilities.
 - **Provider Abstraction** – Robust HTTP client with caching, retry logic, and
   an implementation for the [TheSportsDB](https://www.thesportsdb.com/) public
   API.
+- **Free Event Lookups** – Quickly fetch specific fixtures from TheSportsDB's
+  free tier by supplying event identifiers.
 - **Prediction Engine** – Algorithms to estimate spreads, totals, and moneyline
   edges using team performance metrics.
 - **Fantasy Projections** – Flexible scoring rules to produce player fantasy
@@ -48,7 +50,14 @@ probabilities.
    ```bash
    stattrackerpro insights 4328
    stattrackerpro fantasy 34145937
+   stattrackerpro events 2052711 2052712 2052713 2052714
    ```
+
+   The ``events`` command looks up fixtures by ID using the free
+   [TheSportsDB lookup endpoint](https://www.thesportsdb.com/api.php). No
+   payment or subscription is required—just pass the identifiers you care
+   about and the CLI will return the scheduled date along with the home and
+   away teams.
 
 ## Testing
 

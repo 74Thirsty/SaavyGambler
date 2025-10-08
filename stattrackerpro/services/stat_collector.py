@@ -24,6 +24,9 @@ class StatCollector:
     def events(self, league_id: str, *, from_date: Optional[date] = None) -> List[Event]:
         return self.provider.get_events(league_id, from_date=from_date)
 
+    def lookup_events(self, event_ids: Iterable[str]) -> List[Event]:
+        return self.provider.lookup_events(event_ids)
+
     def player_stats(self, player_ids: Iterable[str]) -> List[PlayerStats]:
         return self.provider.get_player_stats(player_ids)
 

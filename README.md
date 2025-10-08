@@ -35,7 +35,7 @@ probabilities.
    ```
 
 2. (Optional) set environment variables in a `.env` file to configure API keys
-   and cache locations. When no key is supplied StatTrackerPro automatically
+   and cache locations. When no key is supplied SaavyGambler automatically
    uses TheSportsDB's free lookup tier, so you can get started without signing
    up for an account:
 
@@ -71,7 +71,7 @@ interface:
 
 ```bash
 pip install -e .[gui]
-stattrackerpro-gui
+gambler-gui
 ```
 
 The desktop application exposes three tabs:
@@ -152,7 +152,7 @@ That file (typical pattern) looks like:
 from fastapi import FastAPI
 from gambler.services import stat_collector, analytics, prediction, fantasy
 
-app = FastAPI(title="StatTrackerPro")
+app = FastAPI(title="SaavyGambler")
 
 @app.get("/health")
 async def health():
@@ -198,7 +198,7 @@ All responses are likely Pydantic-validated (`schemas.py`) JSON payloads.
 
 ### 💡 **In short**
 
-The **FastAPI service** in StatTrackerPro is an API gateway that:
+The **FastAPI service** in SaavyGambler is an API gateway that:
 
 * Connects to third-party sports data sources (TheSportsDB, etc.),
 * Ingests live or cached game/player/team data,

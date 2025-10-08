@@ -1,4 +1,4 @@
-"""Module entry point for ``python -m stattrackerpro.gui``."""
+"""Module entry point for ``python -m saavygambler.gui``."""
 from __future__ import annotations
 
 from .app import main

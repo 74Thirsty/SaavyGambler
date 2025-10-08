@@ -1,12 +1,12 @@
 from datetime import date
 
-from stattrackerpro.gui.controller import (
+from saavygambler.gui.controller import (
     SummaryRow,
     format_event_summary,
     format_player_summary,
     format_team_summary,
 )
-from stattrackerpro.models import Event, PlayerStats, TeamStats
+from saavygambler.models import Event, PlayerStats, TeamStats
 
 
 def test_format_team_summary_includes_record_and_points():

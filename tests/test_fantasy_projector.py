@@ -1,5 +1,5 @@
-from stattrackerpro.models import PlayerStats
-from stattrackerpro.services.fantasy import FantasyProjector, ScoringRule
+from saavygambler.models import PlayerStats
+from saavygambler.services.fantasy import FantasyProjector, ScoringRule
 
 
 def test_projector_orders_players_by_projection():

@@ -1,4 +1,4 @@
-"""KivyMD powered application for the StatTrackerPro toolkit."""
+"""KivyMD powered application for the SaavyGambler toolkit."""
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
@@ -187,7 +187,7 @@ class _PlayerStatsTab(_BaseTab):
 
 
 class StatTrackerApp(MDApp):
-    """KivyMD application exposing StatTrackerPro features."""
+    """KivyMD application exposing SaavyGambler features."""
 
     def __init__(self, controller: Optional[StatTrackerController] = None, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -195,13 +195,13 @@ class StatTrackerApp(MDApp):
         self._executor = ThreadPoolExecutor(max_workers=4)
 
     def build(self) -> MDScreen:
-        self.title = "StatTrackerPro"
+        self.title = "SaavyGambler"
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Blue"
         self.theme_cls.material_style = "M3"
         screen = MDScreen()
         root = MDBoxLayout(orientation="vertical")
-        root.add_widget(MDTopAppBar(title="StatTrackerPro", elevation=4))
+        root.add_widget(MDTopAppBar(title="SaavyGambler", elevation=4))
         tabs = MDTabs()
         self._team_tab = _TeamSearchTab(app=self)
         self._event_tab = _EventLookupTab(app=self)

@@ -1,4 +1,4 @@
-"""Domain models used across StatTrackerPro."""
+"""Domain models used across SaavyGambler."""
 from __future__ import annotations
 
 from dataclasses import dataclass, field

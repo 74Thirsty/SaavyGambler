@@ -1,4 +1,4 @@
-"""Controller utilities used by the StatTrackerPro GUI."""
+"""Controller utilities used by the SaavyGambler GUI."""
 from __future__ import annotations
 
 from dataclasses import dataclass

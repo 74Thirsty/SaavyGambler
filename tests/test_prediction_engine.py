@@ -1,7 +1,7 @@
 from datetime import date
 
-from stattrackerpro.models import Event, TeamStats
-from stattrackerpro.services.prediction import PredictionEngine
+from saavygambler.models import Event, TeamStats
+from saavygambler.services.prediction import PredictionEngine
 
 
 def test_predict_spread_uses_basic_stats():

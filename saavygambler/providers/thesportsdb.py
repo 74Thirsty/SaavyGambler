@@ -159,11 +159,7 @@ class TheSportsDBProvider(SportsDataProvider):
             return None
 
     def _build_event(self, item: dict) -> Event:
-        event_date_str = item.get("dateEvent")
-        if event_date_str:
-            event_date = datetime.strptime(event_date_str, "%Y-%m-%d").date()
-        else:
-            event_date = date.today()
+        event_date = self._parse_event_date(item.get("dateEvent"))
         return Event(
             event_id=item.get("idEvent", ""),
             league_id=item.get("idLeague"),
@@ -177,6 +173,15 @@ class TheSportsDBProvider(SportsDataProvider):
             home_team_name=item.get("strHomeTeam"),
             away_team_name=item.get("strAwayTeam"),
         )
+
+    @staticmethod
+    def _parse_event_date(value: Optional[str]) -> date:
+        if not value:
+            return date.today()
+        try:
+            return datetime.strptime(value, "%Y-%m-%d").date()
+        except (TypeError, ValueError):
+            return date.today()
 
 
 __all__ = ["TheSportsDBProvider"]

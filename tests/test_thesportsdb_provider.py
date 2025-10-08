@@ -110,6 +110,29 @@ def test_get_events_includes_team_names():
     assert event.event_date == date(2024, 2, 1)
 
 
+def test_get_events_handles_invalid_dates_gracefully():
+    league_payload = {
+        "events": [
+            {
+                "idEvent": "9999",
+                "idLeague": "555",
+                "idHomeTeam": "100",
+                "idAwayTeam": "200",
+                "dateEvent": "not-a-date",
+                "strHomeTeam": "Alpha",
+                "strAwayTeam": "Beta",
+            }
+        ]
+    }
+    provider = TheSportsDBProvider(client=DummyClient(league_payload=league_payload))
+
+    events = provider.get_events("555")
+
+    assert len(events) == 1
+    event = events[0]
+    assert event.event_date == date.today()
+
+
 def test_provider_uses_free_lookup_key_when_api_key_missing():
     dummy_client = DummyClient(event_payloads={"42": {"events": []}})
     fake_settings = types.SimpleNamespace(sportsdb_api_key="   ")
